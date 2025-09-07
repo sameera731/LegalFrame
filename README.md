@@ -44,7 +44,9 @@ LegalFrame is not just another project management tool — it is an intelligent 
 
 ---
 🛠️ Backend Routes
+```
 🔐 Authentication Routes (Public)
+```
 
 These routes handle user registration, login, and logout.
 ```
