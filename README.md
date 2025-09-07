@@ -1,92 +1,195 @@
 # SynergySphere-LegalFrame-Team-SynergyBytes
-Yt link:https://youtu.be/yLXqBw5iKVY
 
-LegalFrame is a smart, cross-platform collaboration tool designed for legal teams. Manage cases, assign tasks, collaborate in real-time, share documents all in one streamlined workspace.
+📺 Demo Video: [YouTube Link](https://youtu.be/yLXqBw5iKVY)
 
-📚 LegalFrame
+---
 
-Smart, cross-platform collaboration tool for legal teams
+## 📚 LegalFrame
 
-🚀 Project Overview
+**LegalFrame** is a smart, cross-platform collaboration tool designed for legal teams. It enables seamless case management, task assignment, document sharing, and real-time collaboration — all in one streamlined workspace and an inbuilt AI clause recommender and legal advisor.
 
-LegalFrame is a next-generation collaboration platform designed specifically for legal professionals. It streamlines how legal teams manage cases, assign tasks, collaborate in real-time.
+---
 
-Our platform aligns with the SynergySphere Challenge Vision:
+## 🚀 Project Overview
 
-"Teams do their best work when their tools truly support how they think, communicate, and move forward together."
+LegalFrame is a next-generation collaboration platform built specifically for legal professionals.  
+It streamlines how legal teams:
 
-LegalFrame is not just another project management tool — it is an intelligent backbone for legal teamwork, built to proactively assist, improve efficiency, and enhance collaboration.
+- Manage cases  
+- Assign and track tasks  
+- Collaborate in real-time  
+- Share critical documents securely  
 
-✨ Key Features
+Our platform aligns with the **SynergySphere Challenge Vision**:
 
-Case & Task Management – Create, assign, and track case-related tasks with due dates and status updates (To-Do, In Progress, Done).
+> *"Teams do their best work when their tools truly support how they think, communicate, and move forward together."*
 
-Novelty Feature: Smart Constitution Clause Suggestor 🧠 – Novel AI-driven module that suggests relevant constitutional clauses based on case details.
+LegalFrame is not just another project management tool — it is an intelligent backbone for legal teamwork, proactively assisting, improving efficiency, and enhancing collaboration.
 
-Team Collaboration – Project-specific threaded discussions.
+---
 
+## ✨ Key Features
 
-✅ Full Tech Stack Breakdown
+- **Case & Task Management**  
+  Create, assign, and track case-related tasks with due dates and status updates (To-Do, In Progress, Done).  
 
-🔧 Backend (Server-Side)
+- **Novelty Feature: Smart Constitution Clause Suggestor 🧠**  
+  AI-driven module that suggests relevant constitutional clauses based on case details using a keyword-based engine.  
 
-Node.js – JavaScript runtime for building the server-side logic.
+- **Team Collaboration**  
+  Project-specific threaded discussions, notes, and real-time updates.  
 
-Express.js (v5.x) – Fast, minimal web framework for routing and handling HTTP requests.
+- **Role-Based Access Control**  
+  Define roles (lawyers, paralegals, clients) with appropriate permissions.  
 
-Express-Session – To manage user sessions.
+---
+🛠️ Backend Routes
+🔐 Authentication Routes (Public)
 
-dotenv – For loading environment variables.
+These routes handle user registration, login, and logout.
+```
+GET    /auth/signup          → Render the sign-up form
+POST   /auth/signup          → Handle user registration form submission
+GET    /auth/login           → Render the login form
+POST   /auth/login           → Handle login form submission
+GET    /auth/logout          → Log the user out and destroy session
+```
 
-cookie-parser – For parsing cookies (used for authentication/session management).
+🔒 Application Routes (Protected)
+```
+All the routes below require users to be logged in. They are protected by the isAuthenticated middleware.
+```
+📂 Main
+```
+GET    /                    → Dashboard or landing page (based on implementation)
+```
+🧾 Cases
+```
+GET    /cases               → List all cases
+GET    /cases/:id           → View details of a specific case
+POST   /cases               → Create a new case
+PUT    /cases/:id           → Update an existing case
+DELETE /cases/:id           → Delete a case
+```
+👥 Case Members
+```
+GET    /cases/:caseId/members               → Get all members in a case
+POST   /cases/:caseId/members               → Add a member to a case
+DELETE /cases/:caseId/members/:memberId     → Remove a member from a case
+```
+✅ Tasks
+```
+GET    /cases/:caseId/tasks   → Get all tasks for a case
+POST   /cases/:caseId/tasks   → Create a task for a case
+PUT    /tasks/:taskId         → Update a task
+DELETE /tasks/:taskId         → Delete a task
+```
+🤖 AI Clause Generator
+```
+GET    /ai-clause             → Render the AI clause generator page
+POST   /ai-clause/generate    → Generate a legal clause using AI
+```
+🛡️ Middleware
+```
+isAuthenticated — Middleware that ensures the user is logged in. If not, redirects to /auth/login.
+```
+Directory Structure
+```
+LEGALFRAME/
+│
+├── backend/
+│   ├── data/
+│   │   └── constitution.json
+│   ├── database/
+│   │   └── schema.sql
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── routes/
+│   │   ├── ai-clause.js
+│   │   ├── auth.js
+│   │   ├── case-members.js
+│   │   ├── cases.js
+│   │   ├── index.js
+│   │   └── tasks.js
+│   ├── services/
+│   │   └── db.js
+│   ├── views/
+│   │   ├── ai/
+│   │   │   └── clause-recommender.ejs
+│   │   ├── cases/
+│   │   │   └── case-details.ejs
+│   │   ├── index.ejs
+│   │   ├── login.ejs
+│   │   └── signup.ejs
+│   ├── .env
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js
+├── constitution.json
+├── .gitignore
+└── README.md
+```
 
-jsonwebtoken (JWT) – For implementing token-based authentication.
+## ✅ Full Tech Stack Breakdown
 
-bcrypt – For securely hashing passwords.
+### 🔧 Backend (Server-Side)
+- **Node.js** – JavaScript runtime for building server-side logic.  
+- **Express.js (v5.x)** – Web framework for routing & handling HTTP requests.  
+- **Express-Session** – For managing user sessions.  
+- **dotenv** – Loads environment variables securely.  
+- **cookie-parser** – Parses cookies (used for authentication/session management).  
+- **jsonwebtoken (JWT)** – Token-based authentication.  
+- **bcrypt** – Secure password hashing.  
 
-🗄 Database
+### 🗄 Database
+- **MySQL** – Relational database for user, case, and session storage.  
+- **mysql2** – Node.js client for MySQL queries.  
 
-MySQL – Relational database for storing user data, session info, etc.
+### 🎨 Frontend (Client-Side)
+- **EJS (Embedded JavaScript Templates)** – Dynamic server-side rendering.  
+- **HTML5** – Webpage structure.  
+- **CSS3** – Styling for the frontend.  
+- **Bootstrap** – Responsive design and UI components.  
 
-mysql2 – Node.js client for connecting and querying MySQL databases.
+### 📦 Package & Module Management
+- **npm** – For managing dependencies like `bcrypt`, `express`, `mysql2`, etc.  
 
-🎨 Frontend (Client-Side)
+---
 
-EJS (Embedded JavaScript Templates) – Server-side templating engine for rendering HTML with dynamic data.
+## 📱 Wireframes (MVP)
 
-HTML5 – Structure of the web pages.
+- **🔑 Login / Signup**  
+  Secure login, register, and forgot password functionality.  
 
-CSS3 – Styling for the frontend.
+- **📂 Project Dashboard**  
+  List of ongoing cases/projects with ability to create new ones.  
 
-Bootstrap – Responsive CSS framework to style components quickly.
+- **📋 Task Board**  
+  Task list showing title, description, status, and due date.  
 
-📦 Package & Module Management
+- **➕ Task Creation**  
+  Form with fields for title, description, and due date.  
 
-npm – Node package manager (managing dependencies like bcrypt, express, etc.).
+---
 
+## 🌟 Vision
 
+LegalFrame aims to **redefine legal collaboration** by combining traditional case/task management with **intelligent clause assistance**.  
 
+Inspired by the SynergySphere mission, LegalFrame is designed to be the **central nervous system for legal teams** — helping them:  
+- Work smarter  
+- Avoid risks  
+- Continuously improve  
 
+---
 
-📱 Wireframes (MVP)
-🔑 Login / Signup
+## ⚡ Future Enhancements
 
-Secure login/register, forgot password.
+- NLP-powered semantic search for constitutional clauses  
+- WebSocket-based real-time updates  
+- Document versioning and secure sharing  
+- Analytics dashboard for case performance tracking  
 
-📂 Project Dashboard
+---
 
-List of ongoing projects with ability to create new ones.
-
-📋 Task Board
-
-Task list showing title and due date.
-
-➕ Task Creation
-
-Form with title, description and due date.
-
-Role-based access control (lawyers, paralegals, clients).
-
-🌟 Vision
-
-LegalFrame aims to redefine legal collaboration by combining case management with intelligent clause assistance. Inspired by the SynergySphere mission, it is designed to be a central nervous system for legal teams — helping them work smarter, avoid risks, and continuously improve.
+🙌 Built with passion by **Team SynergyBytes**  
