@@ -1,6 +1,4 @@
-# SynergySphere-LegalFrame-Team-SynergyBytes
-
-📺 Demo Video: [YouTube Link](https://youtu.be/yLXqBw5iKVY)
+# LegalFrame
 
 ---
 
